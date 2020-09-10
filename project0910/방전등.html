@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrapper {
+      width: 800px;
+      height: 600px;
+      margin: auto;
+      overflow: hidden; /* 자식이 float으로 떠있어서 넘쳐흐르면 자식을 제한해야함*/
+    }
+    #code {
+      width: 100px;
+      height: 100%;
+      background: #cccccc;
+      float: left;
+    }
+    #mask {
+      width: 700px;
+      height: 100%;
+      background-color: black;
+      opacity: 0.8;
+      float: left;
+    }
+    #room {
+      width: 100%;
+      height: 100%;
+      float: left;
+    }
+  </style>
+  <script>
+    var bg;
+    var flag = true;
+    function turn() {
+      bg = (flag)? "white":"black";
+      document.getElementById("mask").style.background= bg;
+      flag = !flag; 
+      console.log("현재 flag값은 ", flag);
+    }
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="code">
+      <button onClick="turn()"></button>
+    </div>
+    <div id="mask"></div>
+      <div id="room">
+        <img src="../images/light/room.jpg" width="700px" height="700px">
+      </div>
+    
+
+ 
+</body>
+</html>
