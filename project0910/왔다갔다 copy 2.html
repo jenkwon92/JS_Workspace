@@ -10,37 +10,33 @@
       height: 100px;
       background: red;
       position: absolute;
-      left: 0;
+      left: 0px;
       top: 200px;
-      right:0px;
     }
   </style>
   <script>
     var x = 0; //박스의 x좌표값을 결정짓는 변수
-    var step = 5;
-    var flag = true;
+    var y = 400;
     function move() {
       //문서내의 box라는 요소의 스타일 포지션의 left값 변경하자
-      x = x + step;
       
-      document.getElementById("box").style.left= x + "px";
+      if (x <= y ){
+      document.getElementById("box").style.left= x + "px"; 
+      else( y >= x, x=400 ){
+      y -= 5;
+      document.getElementById("box").style.left= y + "px";}
+    
       //정보를 출력하면서 개발하기 위해 텍스트박스에 출력
       document.getElementById("infoX").value=x;
+      document.getElementById("infoY").value=y;
       
-
-      flag = (x <= 0 || x >=400)? !flag : flag;
-      step = (flag)? 5: -5;
-    }
-    function auto() {
-      setInterval("move()",10);
     }
   </script>
 </head>
 <body>
-  <button onClick="move()">수동움직이기</button>
-  <button onClick="auto()">자동움직이기</button>
+  <button onClick="move()">움직이기</button>
   <input type ="text" id="infoX"/>
-  
+  <input type ="text" id="infoY"/>
   <div id="box"></div>
 </body>
 </html>

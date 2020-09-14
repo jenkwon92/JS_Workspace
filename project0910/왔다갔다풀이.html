@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background: red;
+      position: absolute;
+      left: 0px;
+      top: 150px;
+      right:0px;
+      color: yellow;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+  <script>
+    var x = 0; //박스의 x좌표값을 결정짓는 변수
+    var step = 5; //우측, 좌측을 결정짓는 발걸음 변수
+    var flag= true;
+    function move() {
+      //문서내의 box라는 요소의 스타일 포지션의 left값 변경하자
+      x = x + step; //우측방향일때는 양수5 , 좌측방향일때는 음수5
+      document.getElementById("box").style.left= x + "px";
+      //정보를 출력하면서 개발하기 위해 텍스트박스에 출력
+      document.getElementById("box").innerText=x;
+      
+      //400 이상이면 -5로 전환
+      //0이면 +5로 전환
+
+      //400이상이거나 , 0이하면 기존의 5는 부호를 바꿔야한다.
+      //방법 1>
+      flag = (x<=0 || x >=400)? !flag: flag;//삼항연산자에게 물어보기
+      step = (flag)? 5 : -5;
+
+      /*
+      방법2>
+      step=(x<=0 || x>=400)? -step: step;
+      */
+    }
+  </script>
+</head>
+<body>
+  <button onClick="move()">움직이기</button>
+  
+  <div id="box"></div>
+</body>
+</html>

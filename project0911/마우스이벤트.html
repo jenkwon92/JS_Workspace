@@ -28,6 +28,10 @@
     <script>
       var a = 25;
       var b = 25;
+
+      var z = parseInt(document.getElementById("pic").style.width);
+      var p = parseInt(document.getElementById("pic").style.height);
+      
       function getPoint(){
         //마우스의 실시간 좌표를 텍스트박스에 출력해보자
 
@@ -44,8 +48,14 @@
         //그렇게하면 이미지의 좌표와 마우스의 좌표가 일치하게되어, 
         //따라다니는 효과가 나게된다.
 
-        document.getElementById("pic").style.left=(event.clientX-25) + "px"; 
-        document.getElementById("pic").style.top=(event.clientY-25) + "px"; 
+        //document.getElementById("pic").style.left=(event.clientX-25) + "px"; 
+        //document.getElementById("pic").style.top=(event.clientY-25) + "px"; 
+
+        
+        
+        document.getElementById("pic").style.left=event.clientX-(z/2)+"px";
+        document.getElementById("pic").style.top=event.clientY-(p/2)+"px";
+
 
       }
     </script>
