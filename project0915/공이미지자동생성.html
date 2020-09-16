@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    var count = 0; //번역변수, 숫자가 누적될 수 있도록 하기위함
+                  // 왜 누적해야하나? 1,2,3,4, 누적해나가다가
+                  //5를 나눈 나머지를 구해야하니까
+    
+
+    function createBall() {
+      count ++;
+      console.log("count is", count);
+      var ball = document.createElement("img"); 
+      //변수 n의 값을 텍스트박스로부터 구하자!
+      var n = document.getElementById("txt").value;
+      n = parseInt(n); //주의! parseInt() 대상이 될 수 있는건 "쌍따옴표" 벗겼을 떄 정수가 될 수 있는 문자만 가능
+      
+      var path = document.getElementById("path").value;
+      /*
+      if (count % 5 != 0) {
+      ball.src="../images/ball/ball1.png";
+      }else{
+      ball.src="../images/ball/ball2.png"; 
+      }
+      */
+      
+      //흑백논리를 처리할때는, 삼항연산자로도 가능
+      ball.src=(count%n==0)? path:"../images/ball/ball1.png";
+      
+      
+      ball.style.width=50+"px";
+      document.body.appendChild(ball);
+    }
+    function auto(){
+      setInterval("createBall()",500); //500/1000초마다
+    }
+  </script>
+</head>
+<body>
+  <input id="txt" type="text" placeholder="몇번째 마다 공을 생성할지 숫자입력"/>
+  <input id="path" type="text" placeholder="사용될 이미지 경로"/>
+  <button onClick="createBall()">공 생성</button>
+  <button onClick="auto()">공 자동생성</button>
+  <br>
+</body>
+</html>
