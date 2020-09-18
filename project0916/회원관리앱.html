@@ -93,11 +93,11 @@
         str= str+"<td>"+name.value+"</td>";
         str= str+"</tr>"; //바닥
       }
-
-
       str = str + "</table>"; // 기존 str에 문자열 누적
       area.innerHTML = str; //문자열 내에 <꺽쇠> 가 있다면, 태그로 해석함
-    
+    }
+    function remove(){
+      document.getElementById("result-area").innerHTML="";
     }
   </script>
 </head>
@@ -114,7 +114,7 @@
         <input type="text" name="name" placeholder="NAME입력"/>
         
         <button onClick="regist()">등록</button>
-        <button>지우기</button>
+        <button onClick="remove()">지우기</button>
       </form>
     </div>
     <div id="result-area">등록된 결과표 나올 영역</div>
