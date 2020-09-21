@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<script>
+  //1
+  var tx,ty; //변수 선언시 콤마를 이용해 연속으로 선언할 수도 있다
+  
+  //6 모든 함수에서 보이도록 전역변수 선언
+  var box; 
+  //9
+  let a = 0.1; //연산으로 변경시킬 목적이 아닌 고정된 상수임
+  //10 박스가 이동할 목표지점
+  var targetX=0;
+  var targetY=0;
+
+  //2 input id부여 후 onload
+  //load이벤트가 발생하면 이름없는 익명함수가 호출된다
+  //이렇게 이벤트 발생시 시스템에 의해 역으로 호출되는 함수 유형을 콜백함수라한다
+  //주로, 이벤트 구현시 사용된다.
+  window.addEventListener("load", function(){
+    init(); //초기화 함수호출
+    //12
+    setInterval("move()",10);
+  });
+  
+  //3
+  function init(){
+    tx = document.getElementById("tx");
+    ty = document.getElementById("ty");
+    
+    //6
+    box = document.getElementById("box");
+    //박스 스타일 적용
+    box.style.position = "absolute";
+    box.style.width = 100 + "px";
+    box.style.height = 100 + "px";
+    box.style.left = 0 + "px";
+    box.style.top = 200 + "px";
+    box.style.background = "yellow";
+    box.style.border = "2px solid red";
+    box.style.borderRadius = "50px";
+    box.style.boxSizing = "border-box";
+    
+    document.body.appendChild(box); //body에 부착
+
+    //4
+    var bt = document.querySelector("button");
+    bt.addEventListener("click",function(){
+      
+      //7 버튼을 누를때는 타겟지점만 지정하면되고, 자동호출함수는 호출하지말자
+      setTarget();
+    });
+  }
+  //8 사용자가 버튼을 누르기도 전에, 이미 작스는 애니메이션이 동작하고 있어야한다.
+  //수동을 먼저 정의
+  function move(){
+    //박스의 좌표이동 : 아래처럼 이동하면 순간이동이 되어 부드럽지 않음
+    //box.style.left = 600 + "px";
+    //box.style.top = 600 + "px";
+    //감속도 공식을 이용하여 움직이자
+    //박스의 위치 = 현재위치 + 일정비율*남은거리
+    //11 박스의 위치 = 현재위치 + a*(목표지점-현재박스의위치)
+    box.style.left = parseFloat(box.style.left) + a*(targetX-parseFloat(box.style.left))+"px";
+    box.style.top = parseFloat(box.style.top) + a*(targetY-parseFloat(box.style.top))+"px";
+  
+    //14
+    //박스안에 좌표도 출력해보자!!
+    box.innerText="x:"+parseFloat(box.style.left)+"\ny:"+parseFloat(box.style.top)
+  
+  }
+  //13 오직 전역변수인 targetX, targetY만 바라보고있는 box의 목표지점을 
+  //아래의 함수에서 지정해보자 
+  //택스트 박스에 입력한 데이터가 곧 박스가 이동할 목표지점이되는 것임
+  function setTarget(){
+    targetX = parseFloat(tx.value);
+    targetY = parseFloat(ty.value);
+  }
+</script>
+<body>
+  <input id="tx" type="text" placeholder="목표 x좌표"> 
+  <input id="ty" type="text" placeholder="목표 y좌표">
+  <button>이동</button> 
+  <!-- 5 -->
+  <div id="box"></div>
+</body>
+</html>

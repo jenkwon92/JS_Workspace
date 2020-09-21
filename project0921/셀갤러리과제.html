@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  #wrapper {
+    width: 600px;
+    height: 600px;
+    background: yellow;
+    margin: auto; 
+    position: relative;
+  }
+  #mask {
+    width: 200px;
+    height: 200px;
+    background: blue;
+    position: absolute;
+    margin-left:200px;
+    margin-top:200px;
+    overflow: hidden;
+  }
+  #pic {
+    width: 600px;
+    height: 600px;
+    background: burlywood;
+  }
+</style>  
+<script>
+  var pic;
+  var targetX =0;
+  var targetY =0;
+
+  function init(){
+    pic = document.getElementById("pic");
+    //7 box위치지정
+    pic.style.position="relative";
+    pic.style.left=0+"px";
+    pic.style.top=0+"px";
+    //4 원하는 이미지 갯수만큼 반복문 수행하여 이미지 동적으로 생성하자
+    //5 반복문 입히기
+    for(var i=1; i<=9; i++){
+      var img = document.createElement("img"); // <img/>와 동일
+      img.src="../images/travel/"+i+".jpg"; // <img src =""/>와 동일
+      img.style.width=200+"px";
+      img.style.height=200+"px";
+      
+      pic.appendChild(img);
+    }
+  }
+  function setTarget(x){
+    //box.style.left=x+"px"; // 화면의 좌측은 음수방향이니까
+    //11
+    targetX = x;
+  }
+  function move() {
+    document.getElementById("pic")
+      if(event.keycode == 37) {//좌
+      pic.style.left=(parseInt(pic.style.left)-200)+"px";
+      }else if(event.keycode == 38) { //상
+        pic.style.left=(parseInt(pic.style.left)+200)+"px";
+      }else if(event.keycode == 39) { //우
+        pic.style.top=(parseInt(pic.style.top)-200)+"px";
+      }else if(event.keycode == 40) { //하
+        pic.style.top=(parseInt(pic.style.top)-200)+"px";  
+      }
+    
+  }
+  
+  window.addEventListener("load",function(){
+    init(); 
+    setInterval("move()",10);
+  });
+</script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="mask">
+      <div id="pic"></div>
+    </div>
+
+  </div>
+</body>
+</html>
