@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  #box{
+    width: 100px;
+    height: 100px;
+    background: red;
+  }
+</style>
+<script>
+  let a =0.1; //비율계수가 높아질 수록, 남은 거리에 대한 움직임이 커지므로 부드럽지 못하다.
+              // 고정된 상수 (나중에 변하지 않을 확률이 높을 때 let사용)
+  var targetX = 800; //박스가 도달할 x축 목표지점
+  var targetY = 600; //박스가 도달할 y축 목표지점
+  var deg = 0; //각도를 누적시킬 전역변수
+
+  //문서가 로드되면, 박스에 대한 초기화를 진행
+  var box; //전역변수
+  
+  function init(){
+    box = document.getElementById("box");
+    box.style.position="absolute";
+    box.style.left=0+"px";
+    box.style.top=100+"px";
+  }
+  //지금까지의 움직임과는 다르게, 목표지점으로 한꺼번에 건너뛰지 말고, 
+  // 조금씩 다가가자 (감속도 운동)
+  function move(){                        //남은 거리
+    //박스의 위치는 = 현재박스의 위치 + a*(700 - 현재박스의위치)
+    //box.style.left = parseInt(box.style.left) + 0.1*(700-parseInt(box.style.left)) + "px";
+    box.style.left = parseInt(box.style.left) + a*(targetX-parseInt(box.style.left)) + "px";
+    console.log(box.style.left);
+    box.style.top = parseInt(box.style.top) + a*(targetY-parseInt(box.style.top)) + "px";
+  
+    //돌려보자
+    deg+=5; //5도씩 증가
+    box.style.transform="rotate("+deg+"deg)";
+  }
+  function auto(){
+    setInterval("move()",10);
+  }
+</script>
+</head>
+<body onLoad="init()">
+  <button onClick="move()">수동움직이기</button>
+  <button onClick="auto()">자동움직이기</button>
+  <div id="box"></div>
+</body>
+</html>
