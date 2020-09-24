@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+  /*좋아하는 과일명을 10개정도 메모리에 올려보자*/
+  // var a ="사과";
+  // var b ="바나나";
+  // var c ="체리";
+  // var d ="두리안";
+  // var e ="자두";
+  // var f ="오렌지";
+  // var g ="포도";
+  // var h ="무화과";
+  // var i ="복숭아";
+  // var j = "딸기";
+
+  //메모리에 올려진 데이터를 출력도 해보자
+  // document.write(a);
+  // document.write(b);
+  // document.write(c);
+  // document.write(d);
+  // document.write(e);
+  // document.write(f);
+  // document.write(g);
+  // document.write(h);
+  // document.write(i);
+  // document.write(j);
+
+
+  /*
+    우리의 현실에서도 물체, 물건을 순서대로 나열해 놓은 것을 배열이라한다
+    배열화 시켜놓으면, 특정 물체를 가리키기 위한 이름을 줄 필요가 없고
+    순서가 있다보니 일괄처리가 가능하다
+    따라서, 현실에서의 이 좋은 개념을 컴퓨터 분야에서 사용하지 않을리가 없다
+    전산분야에서도 배열의 개념을 도입한 문법을 지원하면 똑같이 배열이라한다
+  */
+
+  var arr = new Array(10); //배열선언 [][][][][][][][][][] 10개의 빈공간 생성
+  arr[0]="사과";
+  arr[1]="바나나";
+  arr[2]="체리";
+  arr[3]="두리안";
+  arr[4]="자두";
+  arr[5]="오렌지";
+  arr[6]="포도";
+  arr[7]="무화과";
+  arr[8]="복숭아";
+  arr[9]= "딸기";
+
+  //모든 과일을 출력하세요
+  for(var i=0; i<=9; i++){
+    document.write(arr[i]);
+  }
+  
+  //첫번째부터 4번째 과일을 출력하시오
+  for(var i=0; i<=3; i++){
+    document.write(arr[i]);
+  }
+
+  //홀수번쨰 과일을 출력하시오
+  for(var i=0; i<=9; i++){
+    if(i % 2 ==1){
+      document.write(arr[i]);
+    }
+
+  }
+</script>
+</head>
+<body>
+
+</body>
+</html>

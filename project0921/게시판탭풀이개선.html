@@ -53,20 +53,19 @@ function init(){
 }
 
 //지금 선택한 탭에 해당하는 div만 나오게 하고, 나머지는 안나오게!! 
+//매개변수 n에는 지금 유저가 선택한 탭의 정보가 넘어옴
 function showHide(n){
+    // box1.style.display ="block";
+    // box2.style.display="none";
+    // box3.style.display="none";
   //매개변수, for문
-  if(n=1){
-    box1.style.display ="block";
-    box2.style.display='none';
-    box3.style.display='none';
-  }else if(n=2){
-    box2.style.display ="block";
-    box1.style.display='none';
-    box3.style.display='none';
-  }else if(n=3){
-    box3.style.display ="block";
-    box1.style.display='none';
-    box2.style.display='none';
+  for(var i=1;i<=3; i++){
+    var box = document.getElementById("box"+i);
+    if(n == i){
+    box.style.display="block"; //전부보임, 지금 선택한 탭이라면 보인다.
+    }else{
+    box.style.display="none"; //전부안보임, 지금 서택한 탭이 아니라면 안보이고
+    }
   }
 }
 

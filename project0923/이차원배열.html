@@ -1,0 +1,34 @@
+<script>
+  var fruit=["apple","banana","grape","orange"];
+  var car =["bmw","audi","benz","kia"];  
+  
+  var box=[]; //1차원? 2차원?
+  
+
+  box.push(fruit); //기존의 1차원이었던 box에 또다른 배열 추가
+  box.push(car); //기존의 1차원이었던 box에 또다른 배열 추가
+
+  // for(바깥쪽 배열의 크기){
+  //   for(안쪽 배열의 크기){
+
+  //   }
+  // }
+
+  // document.write(box[0][0]);
+  // document.write(box[0][1]);
+  // document.write(box[0][2]);
+  // document.write(box[0][3]);
+  // document.write("<br/>");
+  // document.write(box[1][0]);
+  // document.write(box[1][1]);
+  // document.write(box[1][2]);
+  // document.write(box[1][4]);
+
+  for(var i=0; i<box.length; i++){
+    for(var a=0; a<box[i].length; a++){
+      document.write(box[i][a]);
+    }
+    document.write("<br/>");
+  }
+
+</script>

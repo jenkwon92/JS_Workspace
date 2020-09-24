@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="../js/lib.js"></script>
+<script>
+var dishes=new Array();
+dishes[0]="떡볶이";
+dishes[1]="감자탕";
+dishes[2]="족발";
+dishes[3]="삼겹살";
+dishes[4]="피자";
+dishes[5]="파스타";
+dishes[6]="소고기";
+dishes[7]="회";
+dishes[8]="불고기";
+dishes[9]="짜장면";
+dishes[10]="돈까스";
+dishes[11]="소바";
+dishes[12]="맥주";
+dishes[13]="소주";
+dishes[14]="치킨";
+dishes[15]="퇴근";
+dishes[16]="라면";
+dishes[17]="굶기";
+
+
+
+window.addEventListener("load",function(){
+  var bt = document.querySelector("button");
+  bt.addEventListener("click",function(){
+    //h1에 메뉴를 출력!
+    var h1 = document.querySelector("h1");
+    //지난 시간에 정의해놓은 getRandom(배열의 길이)
+
+    h1.innerText = dishes[getRandom(dishes.length-1)];//0~17
+  });
+  
+});
+
+</script>
+</head>
+<body>
+  <button>점심메뉴보러가기</button>
+  <h1></h1>
+</body>
+</html>
