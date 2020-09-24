@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  #wrapper{
+    width: 500px;
+    height: 550px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin:auto;
+    
+  }
+  #pic {
+    width: 100%;
+    height: 300px;
+  }
+  #hint{
+    width: 100%;
+    height: 100px; 
+    background: orange;
+    text-align: center;
+    font-size: 40px;
+  }
+  #feedback, #record{
+    width: 100%;
+    height: 50px; 
+    background: orange;
+    text-align: center;
+    font-size: 40px;
+  }
+  .word-input input{
+    width: 98%;
+    height: 50px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+</style>
+<script>
+  var data = [
+    ["../images/nation/1.jpg", "세계최대강대국","미국"],
+    ["../images/nation/2.jpg", "산초","멕시코"],
+    ["../images/nation/3.jpg", "로마제국","이탈리아"],
+    ["../images/nation/4.jpg", "신사의 나라,007","영국"],
+    ["../images/nation/5.jpg", "나찌","독일"],
+    ["../images/nation/6.jpg", "무적함대","스페인"],
+    ["../images/nation/7.jpg", "에펠탑","프랑스"],
+    ["../images/nation/8.jpg", "차이코프스키","러시아"],
+    ["../images/nation/9.jpg", "쌈바축구","브라질"],
+    ["../images/nation/10.jpg", "아이스하키","캐나다"],
+    ["../images/nation/11.jpg", "후지산","일본"],
+    ["../images/nation/12.jpg", "쿵푸 팬더","중국"],
+    ["../images/nation/13.jpg", "코알라","호주"]
+  ];
+  //이비지 생성
+  function createImg(){
+    var img;
+    for(var i=0; i<data.length;i++){
+      for(var a=0; a<data[i].length; a++){
+        //한개를 먼저 생성해보자
+        if(data[i][2]==txt.value){
+          feedback.innerText="O";
+          score +=10;
+          printScore(); //점수출력
+          img = document.createElement("img");
+          img.src=data[i][0];
+          img.style.width=100%+"px";
+          img.style.height=100%+"px";
+          img.style.position="absolute";
+          
+          pic.appendChild(img);
+        }
+      }
+    }
+  }
+  
+
+  function init(){
+    pic = document.getElementById("pic");
+    hint = document.getElementById("hint");
+    txt = document.getElementById("txt");
+    feedback = document.getElementById("feedback");
+    record = document.getElementById("record");
+    
+    txt.focus();
+    createImg();
+
+
+  }
+  //단어 출력처리
+  function printWord(){
+    question.innerText = word[n];
+  }
+  
+  //점수출력처리
+  function printScore(){
+    record.innerText = score +" 점";
+  }
+
+  window.addEventListener("load",function(){
+    init();
+  });
+</script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="pic">사진</div>
+    <div id="hint">힌트나올곳</div>
+    <div class="word-input">
+      <input id="txt" type="text" placeholder="정답을 입력하세요"/>
+    </div>
+    <div id="feedback">o</div>
+    <div id="record">점</div>
+  </div>
+  
+</body>
+</html>
