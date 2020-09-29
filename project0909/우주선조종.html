@@ -31,7 +31,7 @@
     var bgX = 0; //배경의 x축 위치를결정짓는 변수
 
     function moveRight() {
-      //문서내에 pic이라는 요소의 css 중 pocition의 x축 즉 left값을 증가
+      //문서내에 pic이라는 요소의 css 중 position의 x축 즉 left값을 증가
       x = x + 10;
       document.getElementById("pic").style.left= x + "px";
     }
@@ -51,7 +51,7 @@
     function moveBg() {
       //body에 적용된 배경 css의 position 값을 x축의 음수값으로 이동
       //body는 어차피 문서내에 1개밖에 없는 유일한 요소이므로 굳이 id 부여할 필요없음
-      bgX = bgX - 5;
+      bgX = bgX -     5;
       document.body.style.backgroundPosition=  bgX + "px 0px";
     }
     //사람이 아닌, 프로그램 언어에서 movebg()를 일정시간동안 계속 호출해준다면

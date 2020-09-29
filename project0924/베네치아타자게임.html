@@ -17,6 +17,29 @@
     height: 100%;
     background: gold;
     float: left;
+    text-align: center;
+  }
+  .dash button, select, input {
+    width: 90%;
+    height: 40px;
+    margin-bottom: 4px;
+    font-size: 24px;
+    margin-top: 4px;
+  }
+  #hpBox {
+    width: 100%;
+    height:200px;
+    overflow: hidden;
+    margin-top: 50px;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+  #scoreBox {
+    width: 100%;
+    height: 100px;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
   }
   #stage {
     width: 1000px;
@@ -45,21 +68,26 @@
     ["배","곶감","떡볶이","김치찌개","눈물","안경","코로나","팬데믹","지박령","하드디스크"]
   ];
   var stage;
+  var sel; //level을 선택할 selectbox
+  var hpBox;//hp를 동적으로 추가하게될 div
+  var scoreBox; //점수를 출력할 div
+  var keyword; //텍스트 입력박스
+  var score=0; //점수
   var level=0; //게이머의 현재 레벨을 표현하는 변수, 우리게임은 6레벨까지 0~5레벨
-  var spanArray=[]; // 단어 1-개의 span을 모아놓을 배열
+  var spanArray=[]; // 단어 10개의 span을 모아놓을 배열
   var stepY=5; //몇 걸음씩 내려올지를 결정하는 변수
   var flag=false; //단어가 움직일지 여부를 결정짓는 논리값 변수
                   //start 버튼 등으로 이 변수를 제엏면 된다.
                   //화면에 등장할 단어를 감쌀 태그 생성
-                  function createWord(){
-                    //해당 stage에 등장할 단어만큼 생성
-                    for(var i=0; i<word[level].length;i++){
+  function createWord(){
+    //해당 stage에 등장할 단어만큼 생성
+    for(var i=0; i<word[level].length;i++){
       span=document.createElement("span");//inline이므로 너비, 높이 가질수 없고,
       // 내부의 컨텐츠만큼만 감싼다 wrapping
       span.innerHTML=word[level][i];
       span.style.position="absolute";
       span.style.left=(i*95)+"px";
-      span.style.top=150+getRandomBetween(-100,0)+"px";
+      span.style.top=150+getRandomBetween(-200,0)+"px";
       stage.appendChild(span);
       spanArray.push(span); //스팬을 배열에 보관! 왜? 추후 움직일 거니까
     }
@@ -67,22 +95,94 @@
   //단어 내려오기 함수
   function move(){
     if(flag){
+      var len=spanArray.length;
       //모든 단어를 대상으로 내려와야 함
-      for(var i=0; i<spanArray.length; i++){
+      for(var i=0; i<len; i++){
+        //한걸음씩 이동
         spanArray[i].style.top=parseInt(spanArray[i].style.top)+stepY+"px";
+        
+        //바닥에 닿았는지 여부 판단
+        if(parseInt(spanArray[i].style.top) >=700){
+          //hpArray로부터 hp요소 하나를 제거
+          //span이 닿았을 때, 배열에서 제거하지 않으면 끝없이 if조건에 true
+          //끝없이 닿은 처리가 되버림
+          //해결책> 실제로, 물리적으로 제거해버리되
+          //배열에서도 삭제해야 남은 span을 대상으로 로직이 실행 
+          console.log(word[level][i]+"번째 요소인 저 닿았어요");
+          //배열에서제거
+          spanArray.splice(len-1,1);
+        }
       }
     }
   }
   function startGame(){
-    flag=!flag;
+    flag=true;
+    
+    keyword.focus(); //입력박스에 커서올려놓기
+  }
+  //레벨을 선택할 옵션을 동적으로 생성
+  function createLevelOption(){
+    for(var i=0; i<word.length; i++){
+      var op = document.createElement("option"); //<option></option>과 동일
+      op.text="레벨"+(i+1);//<option>레벨1</option>과 동일
+      op.value=i;
+      //select 박스에 추가
+      sel.add(op); //select박스에 자식으로 추가
+    }
+  }
+  function createHp(){
+    for(var i=1; i<10; i++) {
+      var hp = document.createElement("div");
+      hp.style.width=60+"px";
+      hp.style.height=60+"px";
+      hp.style.background="red";
+      hp.style.float="left";
+      hp.style.border="2px solid yellow";
+      //hpBox에 부착
+      hpBox.appendChild(hp);
+    }
+  }
+  //점수를 출력하는 함수
+  function printScore(){
+    scoreBox.innerHTML=score+"점";
   }
   function init(){
     stage=document.getElementById("stage");
+    sel=document.getElementById("sel");
+    hpBox=document.getElementById("hpBox");
+    scoreBox=document.getElementById("scoreBox");
+    keyword=document.getElementById("keyword");
+    
+    //입력박스에 이벤트 구현
+    //addEventListner()이용하면 두번째의 익명함수의 매개변수로 event객체가 전달된다
+    keyword.addEventListener("keyup",function(e){
+      if(e.keyCode==13){ //ascii코드가 13일때만
+        //alert("나눌렀어?"); 
+        //입력텍스트와 배열안의 텍스트들을 모두 비교하자
+        for(var i=0; i<word[level].length; i++){
+          if(keyword.value==word[level][i]){
+            //alert(i+"일치하는 단어찾음");
+            //spanArray[i].style.color="red";
+
+            //span 엘리먼트 자체를 제거해보자
+            stage.removeChild(spanArray[i]); //부모로부터 삭제
+
+            score+=10;//10점 누적
+            printScore(); //화면에 출력
+          }
+        }
+        //다시 입력박스 초기화
+        keyword.value="";
+      }
+    });
   }
   window.addEventListener("load",function(){
     init();
     createWord();
-    setInterval("move()",500);
+    createLevelOption();
+    createHp();
+    printScore();
+    setInterval("move()",100);
   });
 </script>
 </head>
@@ -90,6 +190,11 @@
   <div class="wrapper">
     <div class="dash">
       <button onClick="startGame()">Start</button>
+      <select id="sel"></select>
+      <input id="keyword" type="text" placeholder="단어입력"/>
+      <div id="hpBox"></div>
+      <div id="scoreBox">0점</div>
+      <div id="itemBox">아이템 이미지</div>
     </div>
     <div id="stage"></div>
   </div>

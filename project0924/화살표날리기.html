@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+</style>
+<script src="../js/lib.js"></script>
+<script>
+  var arrow;
+  var arrowArray=[]; //arrow를 모아 놓은 배열
+  function createArrow(){
+    for(var i=0; i<5; i++){
+      arrow = document.createElement("span");
+      arrow.innerText="→"
+      arrow.style.position="absolute";
+      arrow.style.color="red";
+      arrow.style.fontWeight="bold";
+      arrow.style.fontSize=100+"px";
+      wrapper.appendChild(arrow);
+      arrowArray.push(arrow);
+    }
+  }
+  function init(){
+    
+  }
+  window.addEventListener("load",function(){
+    init();
+    createArrow();
+  });
+</script>
+
+</head>
+<body>
+  <div id="wrapper"></div>
+</body>
+</html>
