@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+var span;
+var x = 0;
+
+// 스펜을 생성하여 화면에 부착
+function createArrow(){
+  span = document.createElement("span");
+  span.innerText="→";
+  span.style.position="absolute";
+  span.style.left=x+"px";
+  span.style.top=200+"px";
+
+  document.body.appendChild(span);
+}
+function tick(){
+  x+=5;  //화면에 그려짐? x, 물리량 변화 즉 사물의 상태 변경
+
+}
+//화살을 움직이기 위한 함수(x축 값을 변경한다)
+function render(){ //화면에 그래픽처리
+  span.style.left=x+"px";
+}
+//끝없이 ,실행되는 게임 루프 영역
+function gameLoop(){
+  console.log("gameLoop called...");
+  tick();
+  render();
+}
+  /*객체의 개념 잡기*/
+window.addEventListener("load",function(){
+  createArrow();
+  setInterval("gameLoop()",10); //fps 프레임 퍼 세컨즈
+});  
+
+</script>
+</head>
+<body>
+  
+</body>
+</html>

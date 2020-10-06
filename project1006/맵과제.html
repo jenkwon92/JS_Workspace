@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  #myMap{
+    width: 1000px;
+    height: 800px;
+    background: yellow;
+    margin:auto;
+  }
+</style>
+<script>
+  var myMap; // div
+  //37.498837, 127.068170 다낭 월남쌈
+  //37.489201, 127.067144 카페타임리즈
+  //37.488975, 127.067633 만선호프
+  //37.493810, 127.061625 버거킹
+  //37.498147, 127.068546 스타벅스
+  //37.510123, 127.063117 신라스테이
+  //37.489470, 127.068185 베스킨라빈스
+  var foodArray= [
+    "37.498837, 127.068170",
+    "37.489201, 127.067144",
+    "37.488975, 127.067633",
+    "37.493810, 127.061625",
+    "37.498147, 127.068546",
+    "37.510123, 127.063117",
+    "37.489470, 127.068185"]
+  function init(){
+    myMap = document.getElementById("myMap");
+    for(var i=0; i<foodArray.length;i++){
+      var pos=new google.maps.LatLng(foodArray[i]);
+    }
+      var mapProp = {
+        center:google.maps.LatLng(37.496887, 127.070474),
+        zoom: 15,
+      };
+    
+    //구글 맵 객체 생성
+    // var map = new google.maps.Map(맵이 그려질div, 옵션);
+    var map = new google.maps.Map(myMap, mapProp);
+    
+    //마커 생성
+    var marker = new google.maps.Marker({
+      position:pos,
+      animation:google.maps.Animation.BOUNCE,
+      icon:{
+        url:"../images/food/noodle.webp",
+        scaledSize:new google.maps.Size(30,30)
+      }
+    });
+    marker.setMap(map); //마커를 적용할 맵 객체
+
+  }
+</script>
+</head>
+<body>
+  <div id="myMap">구글 지도 나올 예정</div>
+</body> 
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=init"></script>
